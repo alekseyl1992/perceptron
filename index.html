@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Shortest path</title>
+    <title>Perceptron</title>
 
     <link rel="stylesheet" href="dist/vendor.css">
     <link rel="stylesheet" href="dist/app.css">
@@ -12,38 +12,48 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8">
-            <div id="input-image">
-                <script id="input-image-template" type="text/handlebars">
-                <table class="image-table">
-                    {{#each this}}
-                        <tr>
+            <div class="row">
+                <div id="input-image" class="col-lg-4">
+                    <script id="input-image-template" type="text/handlebars">
+                    <table class="image-table">
                         {{#each this}}
-                        <td class="cell cell{{this}}">
-                        </td>
+                            <tr>
+                            {{#each this}}
+                            <td class="cell cell{{this}}" data-value="{{this}}">
+                            </td>
+                            {{/each}}
+                            </tr>
                         {{/each}}
-                        </tr>
-                    {{/each}}
-                </table>
-                <button class="set-label btn" data-value="0">0</button>
-                <button class="set-label btn" data-value="1">1</button>
-                <button class="set-label btn" data-value="clear">Clear</button>
-                </script>
+                    </table>
+                    </script>
+                </div>
+                <div class="display col-md-8">
+                    This is: <span class="display__value">--</span>
+                    <br>
+                    <button class="btn btn-primary" id="recognize">Recognize</button>
+                </div>
+            </div>
+
+            <div>
+                <button class="add-image btn" data-value="0">0</button>
+                <button class="add-image btn" data-value="1">1</button>
+                <button class="clear btn" data-value="clear">Clear</button>
             </div>
             <hr>
             <div id="training-set">
                 <script id="training-set-image-template" type="text/handlebars">
-                <div class="thumbnail sample">
+                <div class="sample" data-label="{{label}}">
                     <div>
                         {{label}}
-                        <div class="pull-right">
-                        [x]
+                        <div class="pull-right remove">
+                            [x]
                         </div>
                     </div>
-                    <table class="table">
+                    <table class="image-table">
                         {{#each image}}
                             <tr>
                             {{#each this}}
-                            <td class="cell cell{{this}}">
+                            <td class="cell cell{{this}}" data-value="{{this}}">
                             </td>
                             {{/each}}
                             </tr>
@@ -59,7 +69,6 @@
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active"><a href="#config" aria-controls="config" role="tab" data-toggle="tab">Config</a></li>
                     <li role="presentation"><a href="#log" aria-controls="log" role="tab" data-toggle="tab">Log</a></li>
-                    <li class="pull-right"><a id="stepsCount">Steps: 0</a></li>
                 </ul>
 
                 <!-- Tab panes -->
@@ -77,31 +86,15 @@
                         </script>
                     </div>
                     <div role="tabpanel" class="tab-pane log" id="log">
-                        <script id="log-template" type="text/handlebars">
-                        <table class="table">
-                           {{#each population}}
-                                <tr>
-                                <td class="log__fitness">{{fitness.cost}}, {{fitness.gapesCount}}:</td>
-                                <td class="log__path">
-                                {{../from}},
-                                {{#each path}}
-                                    {{label}},
-                                {{/each}}
-                                {{../to}}
-                                </td>
-                                </tr>
-                            {{/each}}
-                        </table>
-                        </script>
+
                     </div>
                 </div>
             </div>
-            <button class="btn btn-default" id="start">Start</button>
-            <button class="btn btn-default" id="step">Step</button>
-            <button class="btn btn-default" id="burst">Burst</button>
+            <button class="btn btn-success" id="train">Train</button>
+            <button class="btn" id="apply">Apply size</button>
+            <button class="btn" id="reset">Reset weights</button>
             <span class="pull-right">
-                <button class="btn btn-default" id="save">Save</button>
-                <button class="btn btn-default" id="load">Load</button>
+                <button class="btn btn-default" id="run-tests">Run tests</button>
             </span>
         </div>
     </div>
