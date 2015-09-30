@@ -27,7 +27,7 @@ export default class Perceptron {
         }
     }
 
-    train(dictionary, speed) {
+    train(trainingSet, speed) {
         var stepsCount = 0;
         var history = new Array(this.weights.length);
         history = _.map(history, () => []);
@@ -36,7 +36,7 @@ export default class Perceptron {
 
         do {
             var sumError = 0;
-            _.each(dictionary, (images, label) => {
+            _.each(trainingSet, (images, label) => {
                 _.each(images, (image) => {
                     let result = this.activate(image).value;
                     let error = label - result;
