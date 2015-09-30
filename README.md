@@ -1,2 +1,2 @@
-# shortest-path
-Genetic algorithm finds shortest path in the net
+# perceptron
+Simple perceptron implementation (client side)
