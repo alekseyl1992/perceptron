@@ -1,0 +1,111 @@
+<html>
+<head>
+    <title>Shortest path</title>
+
+    <link rel="stylesheet" href="dist/vendor.css">
+    <link rel="stylesheet" href="dist/app.css">
+    <script src="dist/vendor.js"></script>
+    <script src="dist/app.js"></script>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <div id="input-image">
+                <script id="input-image-template" type="text/handlebars">
+                <table class="image-table">
+                    {{#each this}}
+                        <tr>
+                        {{#each this}}
+                        <td class="cell cell{{this}}">
+                        </td>
+                        {{/each}}
+                        </tr>
+                    {{/each}}
+                </table>
+                <button class="set-label btn" data-value="0">0</button>
+                <button class="set-label btn" data-value="1">1</button>
+                <button class="set-label btn" data-value="clear">Clear</button>
+                </script>
+            </div>
+            <hr>
+            <div id="training-set">
+                <script id="training-set-image-template" type="text/handlebars">
+                <div class="thumbnail sample">
+                    <div>
+                        {{label}}
+                        <div class="pull-right">
+                        [x]
+                        </div>
+                    </div>
+                    <table class="table">
+                        {{#each image}}
+                            <tr>
+                            {{#each this}}
+                            <td class="cell cell{{this}}">
+                            </td>
+                            {{/each}}
+                            </tr>
+                        {{/each}}
+                    </table>
+                </div>
+                </script>
+            </div>
+        </div>
+        <div id="panel" class="col-md-4">
+            <div>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#config" aria-controls="config" role="tab" data-toggle="tab">Config</a></li>
+                    <li role="presentation"><a href="#log" aria-controls="log" role="tab" data-toggle="tab">Log</a></li>
+                    <li class="pull-right"><a id="stepsCount">Steps: 0</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane config active" id="config">
+                        <script id="config-template" type="text/handlebars">
+                        <table class="table">
+                            {{#each config}}
+                                <tr>
+                                <td>{{@key}}:</td>
+                                <td><input type="text" value="{{this}}" data-key="{{@key}}"></td>
+                                </tr>
+                            {{/each}}
+                        </table>
+                        </script>
+                    </div>
+                    <div role="tabpanel" class="tab-pane log" id="log">
+                        <script id="log-template" type="text/handlebars">
+                        <table class="table">
+                           {{#each population}}
+                                <tr>
+                                <td class="log__fitness">{{fitness.cost}}, {{fitness.gapesCount}}:</td>
+                                <td class="log__path">
+                                {{../from}},
+                                {{#each path}}
+                                    {{label}},
+                                {{/each}}
+                                {{../to}}
+                                </td>
+                                </tr>
+                            {{/each}}
+                        </table>
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-default" id="start">Start</button>
+            <button class="btn btn-default" id="step">Step</button>
+            <button class="btn btn-default" id="burst">Burst</button>
+            <span class="pull-right">
+                <button class="btn btn-default" id="save">Save</button>
+                <button class="btn btn-default" id="load">Load</button>
+            </span>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

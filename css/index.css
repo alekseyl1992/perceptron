@@ -1,0 +1,42 @@
+
+.log__fitness {
+    width: 30%;
+}
+
+.log__path {
+    width: 70%;
+}
+
+.log {
+    height: 86%;
+    overflow: auto;
+ }
+
+.config {
+    height: 86%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.plot {
+    width: 400px;
+    height: 400px;
+}
+
+.image-table {
+    margin: 20px;
+}
+
+.cell {
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
+}
+
+.cell0 {
+    background-color: white;
+}
+
+.cell1 {
+    background-color: blue;
+}
